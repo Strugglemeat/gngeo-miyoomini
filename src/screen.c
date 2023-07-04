@@ -43,6 +43,15 @@ void screen_flip(void)
   SDL_FillRect(buffer, &left_border, 0);
   SDL_FillRect(buffer, &right_border, 0);
   SDL_BlitSurface(buffer, &visible_area, screen, &drt);
+
+  uint16_t *s = buffer->pixels;
+  uint16_t *d = screen->pixels;
+  for (int y = 0; y < 240; y++) {
+      for (int x = 0; x < 320; x++) {
+          d[((239 - y) * 320) + (319 - x)] = s[(y * 352) + x];
+      }
+  }
+
   SDL_Flip(screen);
 }
 
@@ -63,7 +72,6 @@ void sdl_init(void)
   SDL_FillRect(buffer, NULL, SDL_MapRGB(buffer->format, 0xe5, 0xe5, 0xe5));
 
   fontbuf = SDL_CreateRGBSurfaceFrom(font_image.pixel_data, font_image.width, font_image.height, 24, font_image.width * 3, 0xff0000, 0xff00, 0xff, 0);
-  //SDL_SetColorKey(fontbuf, SDL_SRCCOLORKEY, SDL_MapRGB(fontbuf->format, 0xff, 0, 0xff));
   fontbuf = SDL_DisplayFormat(fontbuf);
 }
 
