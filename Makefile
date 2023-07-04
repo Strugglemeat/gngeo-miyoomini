@@ -1,9 +1,9 @@
 
 TARGET = gngeo
 
-CC = /home/bankbank/miyoomini/gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc
-CXX = /home/bankbank/miyoomini/gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-g++
-STRIP = /home/bankbank/miyoomini/gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-strip
+CC = ../gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc
+CXX = ../gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-g++
+STRIP = ../gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-strip
 
 SOURCES = src/
 CFILES = $(foreach dir, $(SOURCES), $(wildcard $(dir)/*.c))
