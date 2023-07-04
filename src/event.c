@@ -133,17 +133,18 @@ int handle_event(void)
         set_abxylr(conf.a_btn, event.type == SDL_KEYDOWN ? 1 : 0);
         break;
       //case SDLK_LALT:
-      case SDLK_SPACE:  
+      case SDLK_SPACE://switch A and Y
         set_abxylr(conf.b_btn, event.type == SDL_KEYDOWN ? 1 : 0);
         break;
       //case SDLK_SPACE:
-      case SDLK_LALT:
+      case SDLK_LALT://switch A and Y
         set_abxylr(conf.x_btn, event.type == SDL_KEYDOWN ? 1 : 0);
         break;
       case SDLK_LSHIFT:
         set_abxylr(conf.y_btn, event.type == SDL_KEYDOWN ? 1 : 0);
         break;
-      case SDLK_ESCAPE:
+      //case SDLK_ESCAPE:
+      case SDLK_RCTRL:
         if(event.type == SDL_KEYDOWN) {
           memory.intern_coin &= ~(1 << 0);
         }
@@ -165,7 +166,9 @@ int handle_event(void)
       case SDLK_BACKSPACE:
         set_abxylr(conf.r_btn, event.type == SDL_KEYDOWN ? 1 : 0);
         break;
-      case SDLK_RCTRL:
+      
+    //case SDLK_RCTRL:
+    case SDLK_ESCAPE:  
         return 1;
       }
       break;

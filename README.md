@@ -4,13 +4,13 @@ TODO:
 
 * center game in frame
 
-* change select to add coin and menu button to access gngeo menu
-
 DONE:
 
 * screen flip
 
-* buttons A and Y flipped (A = button 2, Y = button 3)
+* buttons: A and Y flipped (A = button 2, Y = button 3)
+
+* buttons: change select to add coin and menu button to access gngeo menu
 
 
 USAGE:
