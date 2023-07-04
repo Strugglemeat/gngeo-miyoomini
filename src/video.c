@@ -227,7 +227,6 @@ static void fix_value_init(void)
 #define PUTPIXEL(dst,src) dst=BLEND16_25(src,dst)
 #include "video_template.h"
 
-//#ifdef ARM
 static inline void draw_tile_arm(unsigned int tileno, int sx, int sy, int zx, int zy, int color, int xflip, int yflip, unsigned char *bmp)
 {
   uint32_t pitch = 352/*buffer->pitch>>1*/;
@@ -265,11 +264,6 @@ static inline void draw_tile_arm(unsigned int tileno, int sx, int sy, int zx, in
   }
   else {
     dda_x_skip_i = ddaxskip_i[zx];
-    /*
-      draw_tile(tileno,sx+16,sy,rzx,yskip,tileatr>>8,
-      tileatr & 0x01,tileatr & 0x02,
-      (unsigned char*)buffer->pixels);
-     */
     if(!xflip) {
       if(!yflip) {
         draw_tile_arm_xzoom(tileno, color,
@@ -296,7 +290,6 @@ static inline void draw_tile_arm(unsigned int tileno, int sx, int sy, int zx, in
     }
   }
 }
-//#endif
 
 static inline void draw_fix_char(unsigned char *buf, int start, int end)
 {
@@ -366,51 +359,7 @@ static inline void draw_fix_char(unsigned char *buf, int start, int end)
       }
 
       br = (unsigned short *) buf + ((y << 3)) * buffer->w + (x << 3) + 16;
-//    #ifdef ARM
       draw_one_char_arm(byte1, byte2, br);
-/*
-    #else
-    paldata = (unsigned int *) &current_pc_pal[16 * byte2];
-      gfxdata = (unsigned int *) &current_fix[ byte1 << 5];
-
-      for(yy = 0; yy < 8; yy++) {
-        myword = gfxdata[yy];
-        col = (myword >> 28) & 0xf;
-        if(col) {
-          br[7] = paldata[col];
-        }
-        col = (myword >> 24) & 0xf;
-        if(col) {
-          br[6] = paldata[col];
-        }
-        col = (myword >> 20) & 0xf;
-        if(col) {
-          br[5] = paldata[col];
-        }
-        col = (myword >> 16) & 0xf;
-        if(col) {
-          br[4] = paldata[col];
-        }
-        col = (myword >> 12) & 0xf;
-        if(col) {
-          br[3] = paldata[col];
-        }
-        col = (myword >> 8) & 0xf;
-        if(col) {
-          br[2] = paldata[col];
-        }
-        col = (myword >> 4) & 0xf;
-        if(col) {
-          br[1] = paldata[col];
-        }
-        col = (myword >> 0) & 0xf;
-        if(col) {
-          br[0] = paldata[col];
-        }
-        br += buffer->w;
-      }
-    #endif
-*/
     }
   if(start != 0 && end != 0) {
     SDL_SetClipRect(buffer, NULL);
@@ -468,8 +417,6 @@ void draw_screen(void)
 
       /* Number of tiles in this strip */
       my = t1 & 0x3f;
-
-
 
       if(my == 0x20) {
         fullmode = 1;
@@ -597,8 +544,6 @@ void draw_screen(void)
         sy -= 0x200;  // NS990105 mslug2 fix
       }
 
-
-
       if(rzy != 255) {
         yskip = 0;
         dda_y_skip_i = 0;
@@ -614,15 +559,10 @@ void draw_screen(void)
           else {
             dda_y_skip[yskip]++;
           }
-
-          //if (dda_y_skip[i])
-          //	    dda_y_skip_i=dda_y_skip_i|(1<<i);
         }
         //printf("%04x\n",dda_y_skip_i);
 
       }
-
-
 
       if(sx >= -16 && sx + 15 < 336 && sy >= 0 && sy + 15 < 256) {
 
@@ -632,36 +572,12 @@ void draw_screen(void)
           tileno = (tileno & ((memory.vid.spr_cache.slot_size >> 7) - 1));
         }
 
-//#ifdef ARM
-
         mem_gfx = memory.rom.tiles.p;
         //if (memory.pen_usage[tileno]!=TILE_INVISIBLE)
         if(penusage != TILE_INVISIBLE)
           draw_tile_arm(tileno, sx + 16, sy, rzx, yskip, tileatr >> 8,
                         tileatr & 0x01, tileatr & 0x02,
                         (unsigned char *) buffer->pixels);
-/*
-#else
-switch(penusage) {
-        case TILE_NORMAL:
-          draw_tile(tileno, sx + 16, sy, rzx, yskip, tileatr >> 8,
-                    tileatr & 0x01, tileatr & 0x02,
-                    (unsigned char *) buffer->pixels);
-          break;
-        case TILE_TRANSPARENT50:
-          draw_tile_50(tileno, sx + 16, sy, rzx, yskip, tileatr >> 8,
-                       tileatr & 0x01, tileatr & 0x02,
-                       (unsigned char *) buffer->pixels);
-          break;
-        case TILE_TRANSPARENT25:
-          draw_tile_25(tileno, sx + 16, sy, rzx, yskip, tileatr >> 8,
-                       tileatr & 0x01, tileatr & 0x02,
-                       (unsigned char *) buffer->pixels);
-          break;
-        }
-
-#endif
-*/
       }
 
       sy += yskip;
@@ -678,8 +594,7 @@ switch(penusage) {
   if(conf.show_fps) {
     SDL_textout(buffer, visible_area.x + 8, 240 - 9, fps_str);
   }
-
-
+  
   screen_flip();
 }
 
@@ -710,12 +625,10 @@ void draw_screen_scanline(int start_line, int end_line, int refresh)
   clear_rect.y = start_line;
   clear_rect.h = end_line - start_line + 1;
 
-
   SDL_FillRect(buffer, &clear_rect, current_pc_pal[4095]);
 
   /* Draw sprites */
   for(count = 0; count < 0x300; count += 2) {
-
 
     tctl3 = READ_WORD(&vidram[0x10000 + count]);
     tctl1 = READ_WORD(&vidram[0x10400 + count]);
@@ -776,8 +689,6 @@ void draw_screen_scanline(int start_line, int end_line, int refresh)
     else {
       zx = 16;
     }
-
-
 
     offs = count << 6;
     zoomy_rom = memory.ng_lo + (zy << 8);
