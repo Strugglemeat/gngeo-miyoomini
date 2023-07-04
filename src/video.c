@@ -39,11 +39,9 @@ extern int neogeo_fix_bank_type;
 static uint16_t fix_addr[40][32];
 static uint8_t fix_shift[40];
 
-//#ifdef ARM
 uint8_t *mem_gfx = NULL;
 uint8_t *mem_video = NULL;
 uint32_t *mem_bank_usage = NULL;
-//#endif
 
 uint32_t neogeo_frame_counter;
 

@@ -34,23 +34,28 @@ SDL_Surface *screen = NULL;
 SDL_Surface *fontbuf = NULL;
 SDL_Rect visible_area = {0};
 
-static SDL_Rect drt = {0, 8, 320, 224};
+static SDL_Rect drt = {0, 0, 320, 224};
 static SDL_Rect left_border = {16, 16, 8, 224};
 static SDL_Rect right_border = {16 + 312, 16, 8, 224};
 
 void screen_flip(void)
 {
-  SDL_FillRect(buffer, &left_border, 0);
-  SDL_FillRect(buffer, &right_border, 0);
+  //SDL_FillRect(buffer, &left_border, 0);
+  //SDL_FillRect(buffer, &right_border, 0);
   SDL_BlitSurface(buffer, &visible_area, screen, &drt);
 
   uint16_t *s = buffer->pixels;
   uint16_t *d = screen->pixels;
+
+  //d = (uint16_t*)screen->pixels + 16*240;
+
   for (int y = 0; y < 240; y++) {
       for (int x = 0; x < 320; x++) {
           d[((239 - y) * 320) + (319 - x)] = s[(y * 352) + x];
       }
   }
+
+  SDL_SoftStretch(screen, NULL, buffer, NULL);
 
   SDL_Flip(screen);
 }

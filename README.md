@@ -6,6 +6,7 @@ TODO:
 
 * change select to add coin and menu button to access gngeo menu
 
+* buttons fixed: now Y = button 2 and A = button 3
 
 DONE:
 
