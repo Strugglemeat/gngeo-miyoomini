@@ -55,7 +55,7 @@ void screen_flip(void)
       }
   }
 
-  SDL_SoftStretch(screen, NULL, buffer, NULL);
+  //SDL_SoftStretch(screen, NULL, buffer, NULL);
 
   SDL_Flip(screen);
 }
