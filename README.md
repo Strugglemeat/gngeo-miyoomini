@@ -2,11 +2,17 @@
 
 TODO:
 
-* screen flip
-
-* black out top 8px and bottom 8px
+* center game in frame
 
 * change select to add coin and menu button to access gngeo menu
+
+
+DONE:
+
+* screen flip
+
+
+USAGE:
 
 using .gno format can speed up loading times dramatically
 
