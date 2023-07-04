@@ -1,1 +1,4 @@
 src/*.o
+*.zip
+images/*
+sdltest/*

@@ -77,7 +77,6 @@ void draw_screen(void);
 int init_sprite_cache(uint32_t size, uint32_t bsize);
 void free_sprite_cache(void);
 
-//#ifdef ARM
 void draw_tile_arm_xflip_norm(uint32_t, uint32_t, void *, uint32_t);
 void draw_tile_arm_yflip_norm(uint32_t, uint32_t, void *, uint32_t);
 void draw_tile_arm_xyflip_norm(uint32_t, uint32_t, void *, uint32_t);
@@ -87,6 +86,5 @@ void draw_tile_arm_yflip_xzoom(uint32_t, uint32_t, void *, uint32_t);
 void draw_tile_arm_xyflip_xzoom(uint32_t, uint32_t, void *, uint32_t);
 void draw_one_char_arm(int byte1, int byte2, unsigned short *br);
 int draw_tile_arm_norm(unsigned int tileno, int color, void *bmp, int zy);
-//#endif
 
 #endif

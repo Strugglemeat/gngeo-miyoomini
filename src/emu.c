@@ -36,9 +36,6 @@
 #include "frame_skip.h"
 #include "ym2610_interf.h"
 
-//#include "rumble.h"
-//#include <SDL_gfxPrimitives.h>
-
 int frame;
 int nb_interlace = 256;
 int current_line;
@@ -266,9 +263,8 @@ void main_loop(void)
 
   while(!neo_emu_done) 
   {
-    if(handle_event())//input
+    if(handle_event())
     {
-
       SDL_BlitSurface(buffer, &buf_rect, state_img, &screen_rect);
 
       if(conf.sound) 
@@ -312,22 +308,6 @@ void main_loop(void)
     {
       cpu_68k_interrupt(a);
     }
-
-   // uint32_t currentPC=cpu_68k_getpc();
-
-  //  printf("&d",currentPC);
-
-//    #define testingAddr 0x9898//0x9c50
-//    #define doingDamagePC 0x15e62
-
-//    for(int i=-32;i<32;i++)if(currentPC==doingDamagePC+i)break;
-
-   // rumble_kof97_training();
-
-    //rumble_temporary_visualization();
-
-  //  rumble_checkMemory();
-
   }//end of while loop
   pause_audio(1);
 }
