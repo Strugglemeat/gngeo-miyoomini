@@ -132,10 +132,12 @@ int handle_event(void)
       case SDLK_LCTRL:
         set_abxylr(conf.a_btn, event.type == SDL_KEYDOWN ? 1 : 0);
         break;
-      case SDLK_LALT:
+      //case SDLK_LALT:
+      case SDLK_SPACE:  
         set_abxylr(conf.b_btn, event.type == SDL_KEYDOWN ? 1 : 0);
         break;
-      case SDLK_SPACE:
+      //case SDLK_SPACE:
+      case SDLK_LALT:
         set_abxylr(conf.x_btn, event.type == SDL_KEYDOWN ? 1 : 0);
         break;
       case SDLK_LSHIFT:
