@@ -34,9 +34,9 @@ SDL_Surface *screen = NULL;
 SDL_Surface *fontbuf = NULL;
 SDL_Rect visible_area = {0};
 
-static SDL_Rect drt = {0, 0, 320, 224};
-static SDL_Rect left_border = {16, 16, 8, 224};
-static SDL_Rect right_border = {16 + 312, 16, 8, 224};
+static SDL_Rect drt ;//= {0, 0, 320, 224};
+//static SDL_Rect left_border = {16, 16, 8, 224};
+//static SDL_Rect right_border = {16 + 312, 16, 8, 224};
 
 void screen_flip(void)
 {
@@ -47,11 +47,11 @@ void screen_flip(void)
   uint16_t *s = buffer->pixels;
   uint16_t *d = screen->pixels;
 
-  //d = (uint16_t*)screen->pixels + 16*240;
+  //d = (uint16_t*)screen->pixels + 32*320;
 
   for (int y = 0; y < 240; y++) {
       for (int x = 0; x < 320; x++) {
-          d[((239 - y) * 320) + (319 - x)] = s[(y * 352) + x];
+          d[((239 - y) * 320) + (351 - 20 - x)] = s[(y * 352) + x];
       }
   }
 
@@ -64,12 +64,12 @@ void sdl_init(void)
 {
   SDL_Init(SDL_INIT_VIDEO);
   atexit(SDL_Quit);
-
+/*
   visible_area.x = 16;
   visible_area.y = 16;
   visible_area.w = 320;
   visible_area.h = 224;
-
+*/
   screen = SDL_SetVideoMode(320, 240, 16, SDL_SWSURFACE | SDL_DOUBLEBUF);
   SDL_ShowCursor(SDL_DISABLE);
 
